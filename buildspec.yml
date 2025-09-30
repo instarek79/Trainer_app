@@ -18,7 +18,7 @@ phases:
       - echo "Deploying to S3..."
       - aws s3 sync dist/ s3://diabetes-front --delete --region us-east-1
       - echo "Invalidating CloudFront cache..."
-      - aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
+      - aws cloudfront create-invalidation --distribution-id E3DWR6HM8O8AXD --paths "/*"
 
 artifacts:
   files:
