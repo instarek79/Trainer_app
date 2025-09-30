@@ -9,14 +9,16 @@ phases:
       - npm install
   build:
     commands:
-      - echo Building React app...
+      - echo Building frontend...
       - npm run build
   post_build:
     commands:
-      - echo Deploying build to S3...
-      - aws s3 sync build/ s3://diabetes-front --delete
-      - echo Invalidating CloudFront cache...
-      - aws cloudfront create-invalidation --distribution-id E3DWR6HM8O8AXD --paths "/*"
+      - echo "Checking dist folder..."
+      - ls -al dist/ || echo "Dist folder missing!"
+      - echo "Deploying to S3..."
+      - aws s3 sync dist/ s3://diabetes-front --delete --region us-east-1
+      - echo "Invalidating CloudFront cache..."
+      - aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
 
 artifacts:
   files:
